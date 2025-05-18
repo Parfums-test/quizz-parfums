@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trouve ta signature olfactive</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: #f8f5f0;
+      color: #2c2c2c;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #e0dcd5;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    h1 {
+      text-align: center;
+      color: #a18866;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question p {
+      font-weight: bold;
+    }
+    label {
+      display: block;
+      margin-left: 15px;
+    }
+    button {
+      display: block;
+      margin: 30px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #a18866;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .result {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #4d3b2f;
+    }
+  </style>
+</head>
+<body>
+  <h1>Trouve ta signature olfactive</h1>
+  <form id="quizForm">
+    <div class="question">
+      <p>1. Quel est votre style vestimentaire ?</p>
+      <label><input type="radio" name="q1" value="A"> Élégant et classique</label>
+      <label><input type="radio" name="q1" value="B"> Décontracté et naturel</label>
+      <label><input type="radio" name="q1" value="C"> Chic et tendance</label>
+      <label><input type="radio" name="q1" value="D"> Original et audacieux</label>
+    </div>
+    <div class="question">
+      <p>2. Quelle est votre saison préférée ?</p>
+      <label><input type="radio" name="q2" value="A"> L’hiver</label>
+      <label><input type="radio" name="q2" value="B"> Le printemps</label>
+      <label><input type="radio" name="q2" value="C"> L’été</label>
+      <label><input type="radio" name="q2" value="D"> L’automne</label>
+    </div>
+    <div class="question">
+      <p>3. Quel type de lieu vous attire le plus ?</p>
+      <label><input type="radio" name="q3" value="A"> Un hôtel de luxe</label>
+      <label><input type="radio" name="q3" value="B"> Une cabane en forêt</label>
+      <label><input type="radio" name="q3" value="C"> Une île paradisiaque</label>
+      <label><input type="radio" name="q3" value="D"> Un rooftop en ville</label>
+    </div>
+    <div class="question">
+      <p>4. Votre boisson favorite ?</p>
+      <label><input type="radio" name="q4" value="A"> Café noir</label>
+      <label><input type="radio" name="q4" value="B"> Tisane naturelle</label>
+      <label><input type="radio" name="q4" value="C"> Cocktail fruité</label>
+      <label><input type="radio" name="q4" value="D"> Gin tonic</label>
+    </div>
+    <div class="question">
+      <p>5. Votre mot-clé dominant ?</p>
+      <label><input type="radio" name="q5" value="A"> Raffinement</label>
+      <label><input type="radio" name="q5" value="B"> Sérénité</label>
+      <label><input type="radio" name="q5" value="C"> Énergie</label>
+      <label><input type="radio" name="q5" value="D"> Créativité</label>
+    </div>
+    <div class="question">
+      <p>6. Quel genre de parfum vous attire le plus ?</p>
+      <label><input type="radio" name="q6" value="A"> Intense et épicé</label>
+      <label><input type="radio" name="q6" value="B"> Boisé et doux</label>
+      <label><input type="radio" name="q6" value="C"> Léger et fruité</label>
+      <label><input type="radio" name="q6" value="D"> Sucré et audacieux</label>
+    </div>
+    <div class="question">
+      <p>7. Un mot qui décrit votre personnalité :</p>
+      <label><input type="radio" name="q7" value="A"> Distingué(e)</label>
+      <label><input type="radio" name="q7" value="B"> Apaisant(e)</label>
+      <label><input type="radio" name="q7" value="C"> Rayonnant(e)</label>
+      <label><input type="radio" name="q7" value="D"> Envoûtant(e)</label>
+    </div>
+    <div class="question">
+      <p>8. Quelle texture préférez-vous ?</p>
+      <label><input type="radio" name="q8" value="A"> Velours</label>
+      <label><input type="radio" name="q8" value="B"> Lin</label>
+      <label><input type="radio" name="q8" value="C"> Soie</label>
+      <label><input type="radio" name="q8" value="D"> Cuir</label>
+    </div>
+    <div class="question">
+      <p>9. Quelle musique vous parle le plus ?</p>
+      <label><input type="radio" name="q9" value="A"> Jazz</label>
+      <label><input type="radio" name="q9" value="B"> Classique</label>
+      <label><input type="radio" name="q9" value="C"> Pop</label>
+      <label><input type="radio" name="q9" value="D"> Électro</label>
+    </div>
+    <div class="question">
+      <p>10. Quel mot vous inspire ?</p>
+      <label><input type="radio" name="q10" value="A"> Mystère</label>
+      <label><input type="radio" name="q10" value="B"> Nature</label>
+      <label><input type="radio" name="q10" value="C"> Soleil</label>
+      <label><input type="radio" name="q10" value="D"> Audace</label>
+    </div>
+
+    <button type="button" onclick="showResult()">Voir mon résultat</button>
+  </form>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    function showResult() {
+      const form = document.getElementById('quizForm');
+      const data = new FormData(form);
+      const counts = { A: 0, B: 0, C: 0, D: 0 };
+      for (const pair of data.entries()) {
+        counts[pair[1]]++;
+      }
+      let max = 'A';
+      for (const key in counts) {
+        if (counts[key] > counts[max]) max = key;
+      }
+      const resultBox = document.getElementById('result');
+      const results = {
+        A: "Votre parfum signature est <strong>Oriental / Ambré</strong> : intense, sophistiqué et profond (ex : Shalimar, Opium, Spicebomb).",
+        B: "Votre parfum signature est <strong>Boisé / Vert</strong> : naturel, calme et élégant (ex : Terre d’Hermès, N°19, Bois d’Argent).",
+        C: "Votre parfum signature est <strong>Floral / Hespéridé</strong> : lumineux, frais et solaire (ex : Light Blue, Daisy, Acqua di Gioia).",
+        D: "Votre parfum signature est <strong>Gourmand / Audacieux</strong> : sucré, moderne et charismatique (ex : Black Opium, La Vie est Belle, 1 Million)."
+      };
+      resultBox.innerHTML = results[max];
+    }
+  </script>
+</body>
+</html>
