@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quel parfum te correspond ?</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #fef8f5;
+      color: #333;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #b47b84;
+    }
+    .question {
+      margin: 20px 0;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .question h2 {
+      font-size: 18px;
+    }
+    button {
+      background-color: #b47b84;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px 5px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    .result {
+      display: none;
+      text-align: center;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Quel parfum te correspond ?</h1>
+  <form id="quizForm">
+    <div class="question">
+      <h2>1. Quelle ambiance te parle le plus ?</h2>
+      <label><input type="radio" name="q1" value="frais" required> Matin d'été</label><br/>
+      <label><input type="radio" name="q1" value="oriental"> Soirée mystérieuse</label><br/>
+      <label><input type="radio" name="q1" value="floral"> Jardin en fleurs</label>
+    </div>
+    <div class="question">
+      <h2>2. Quelle est ta couleur préférée ?</h2>
+      <label><input type="radio" name="q2" value="floral" required> Rose</label><br/>
+      <label><input type="radio" name="q2" value="oriental"> Noir</label><br/>
+      <label><input type="radio" name="q2" value="frais"> Bleu ciel</label>
+    </div>
+    <div class="question">
+      <h2>3. Quel tissu préfères-tu porter ?</h2>
+      <label><input type="radio" name="q3" value="oriental" required> Velours</label><br/>
+      <label><input type="radio" name="q3" value="floral"> Dentelle</label><br/>
+      <label><input type="radio" name="q3" value="frais"> Coton</label>
+    </div>
+    <div class="question">
+      <h2>4. Ton mood idéal ?</h2>
+      <label><input type="radio" name="q4" value="frais" required> Fraîcheur et vitalité</label><br/>
+      <label><input type="radio" name="q4" value="floral"> Douceur et romantisme</label><br/>
+      <label><input type="radio" name="q4" value="oriental"> Mystère et séduction</label>
+    </div>
+    <div class="question">
+      <h2>5. Une boisson pour te définir ?</h2>
+      <label><input type="radio" name="q5" value="frais" required> Eau infusée</label><br/>
+      <label><input type="radio" name="q5" value="floral"> Thé à la rose</label><br/>
+      <label><input type="radio" name="q5" value="oriental"> Cocktail épicé</label>
+    </div>
+    <div class="question">
+      <h2>6. Quel est ton accessoire fétiche ?</h2>
+      <label><input type="radio" name="q6" value="oriental" required> Boucles d’oreilles dorées</label><br/>
+      <label><input type="radio" name="q6" value="frais"> Sac en toile</label><br/>
+      <label><input type="radio" name="q6" value="floral"> Foulard fleuri</label>
+    </div>
+    <div class="question">
+      <h2>7. Ta destination rêvée ?</h2>
+      <label><input type="radio" name="q7" value="oriental" required> Marrakech</label><br/>
+      <label><input type="radio" name="q7" value="frais"> Islande</label><br/>
+      <label><input type="radio" name="q7" value="floral"> Provence</label>
+    </div>
+    <div class="question">
+      <h2>8. Ton parfum idéal évoque :</h2>
+      <label><input type="radio" name="q8" value="floral" required> Des fleurs fraîches</label><br/>
+      <label><input type="radio" name="q8" value="frais"> Une brise marine</label><br/>
+      <label><input type="radio" name="q8" value="oriental"> Des épices chaudes</label>
+    </div>
+    <div class="question">
+      <h2>9. Tu es plutôt :</h2>
+      <label><input type="radio" name="q9" value="floral" required> Rêveuse</label><br/>
+      <label><input type="radio" name="q9" value="frais"> Dynamique</label><br/>
+      <label><input type="radio" name="q9" value="oriental"> Charismatique</label>
+    </div>
+    <div class="question">
+      <h2>10. Une fleur que tu aimes ?</h2>
+      <label><input type="radio" name="q10" value="frais" required> Menthe</label><br/>
+      <label><input type="radio" name="q10" value="floral"> Pivoine</label><br/>
+      <label><input type="radio" name="q10" value="oriental"> Jasmin</label>
+    </div>
+    <div style="text-align: center;">
+      <button type="submit">Voir mon parfum</button>
+    </div>
+  </form>
+
+  <div class="result" id="resultBox">
+    <h2 id="resultTitle"></h2>
+    <p id="resultText"></p>
+    <button onclick="window.location.reload()">Recommencer</button>
+  </div>
+
+  <script>
+    document.getElementById("quizForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const answers = new FormData(e.target);
+      let scores = { floral: 0, frais: 0, oriental: 0 };
+
+      for (let [_, value] of answers.entries()) {
+        scores[value]++;
+      }
+
+      let result = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+      let resultTitle = "";
+      let resultText = "";
+
+      if (result === "floral") {
+        resultTitle = "🌸 Ton univers est Floral";
+        resultText = "Tu es douce, romantique et tu rayonnes de tendresse. Les parfums à base de rose, de pivoine ou de fleur d’oranger sont faits pour toi.";
+      } else if (result === "frais") {
+        resultTitle = "🌿 Ton univers est Frais";
+        resultText = "Tu es vive, naturelle et pétillante. Les notes aquatiques, citronnées ou herbacées révèlent parfaitement ta personnalité.";
+      } else {
+        resultTitle = "🔥 Ton univers est Oriental";
+        resultText = "Tu es mystérieuse, audacieuse et intense. Les parfums ambrés, boisés ou épicés t’envelopperont avec caractère.";
+      }
+
+      document.getElementById("quizForm").style.display = "none";
+      document.getElementById("resultBox").style.display = "block";
+      document.getElementById("resultTitle").innerText = resultTitle;
+      document.getElementById("resultText").innerText = resultText;
+    });
+  </script>
+
+</body>
+</html>
